@@ -3,7 +3,7 @@ import React from 'react';
 
 function MobileComponent() {
     const containerStyle = {
-        backgroundColor: '#1EC7FA',
+        backgroundColor: '#ADD8E6',
         fontSize: '12px',
         fontFamily: 'Space mono',
 
@@ -12,8 +12,8 @@ function MobileComponent() {
         justifyContent: 'center',
 
         height: '100%',
-        width: '100%'',
-        top-margin: '24px',
+        width: '100%',
+        topMargin: '24px',
       };
   
     return (
