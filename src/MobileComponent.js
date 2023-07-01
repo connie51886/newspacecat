@@ -3,7 +3,9 @@ import React from 'react';
 
 function MobileComponent() {
     const containerStyle = {
-        backgroundColor: '#1EC7FA'
+        backgroundColor: '#1EC7FA',
+        fontSize: '24px',
+        fontFamily: 'Space mono',
       };
   
     return (

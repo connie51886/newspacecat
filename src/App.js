@@ -2,9 +2,31 @@ import './App.css';
 import React , {  useState } from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import NewPage from './NewPage';
+import MobileComponent from './MobileComponent';
+import { isMobile } from 'react-device-detect';
 
 function App() {
+  let componentToRender;
 
+  if (isMobile) {
+    componentToRender = <MobileComponent />;
+  } else {
+    componentToRender = (
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/newpage" element={<NewPage />} />
+        </Routes>
+      </Router>
+    );
+  }
+
+  return <div>{componentToRender}</div>;
+}
+
+  
+
+  function Home() {
 
   //desktop begins
   const backgroundImage = {
@@ -135,38 +157,14 @@ function App() {
     window.open('https://www.youtube.com/watch?v=qjf472A83N8&ab_channel=Science', '_blank');
   };
 
-
-
-  return (
-  
-  <Router>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/newpage" element={<NewPage />} />
-    </Routes>
-  </Router>
-    
-  );
-
-
-
-  function Home() {
-
-
     return (
       <div style={backgroundImage}>
-       
-
         <div style={containerStyle}>
           <img src="./images/cat.png" style={catStyle} alt="cat" />
           <img src="./images/dialogue.png" style={bubbleStyle} alt="dialogue" />
-s
             <div style={boxStyle}>
-
               <div style={buttonContainerStyle} >
-
                   <Link to="/newpage" style={{ width: '100%' }} >
-
                   <div style={buttonWrapperStyle} >
                         <button 
                         style={buttonStyle1}
@@ -176,30 +174,21 @@ s
                           🚀 Find out
                         </button>
                   </div>
-
-                
-            
-            
             </Link>
             
-            <div style={buttonWrapperStyle}
+                <div style={buttonWrapperStyle}
                         onClick={handleButton2Click}>
                 <button style={buttonStyle2}
                   onMouseEnter={() => setButton2Hover(true)}
                   onMouseLeave={() => setButton2Hover(false)}>
-                    
-                  
                   No, I like gravity
                   </button>
               </div>
-
-
         </div>
         </div>
         </div>
       </div>
-    )
-  };
-}
+    );
+  }
 
 export default App;
