@@ -10,7 +10,10 @@ function MobileComponent() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100vh', // Set the height of the container to fill the viewport
+
+        height: '100%',
+        width: '100%'',
+        top-margin: '24px',
       };
   
     return (
