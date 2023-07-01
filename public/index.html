@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Cat game</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Mono&family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <canvas id="game-canvas" width="720" height="380"></canvas>
+    </div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+   
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function drawCanvas(color, rectangle) {
+            ctx.fillStyle = color;
+            ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+        }
+
+        function renderGame() {
+            fetch('http://127.0.0.1:5000/api/draw-canvas', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    const canvasData = data.data;
+                    drawCanvas(canvasData.color, canvasData.rectangle);
+                });
+        }
+
+        function startGame() {
+            fetch('http://127.0.0.1:5000/api/start-game', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    // Process the game data and update the game state on the frontend
+                });
+        }
+
+        function changeDirection(direction) {
+            fetch('http://127.0.0.1:5000/api/change-direction', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ direction: direction })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the direction change response, if needed
+                });
+        }
+
+        // Call the necessary functions to start the game and render the canvas
+        startGame();
+        renderGame();
+    </script>
+
+  </body>
+</html>
